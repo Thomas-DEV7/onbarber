@@ -10,10 +10,18 @@ const path = require('path');
 // });
 
 
-fs.writeFile(path.join(__dirname, '/test', 'arquivo.txt'), 'Conteúdo do arquivo', (error) => {
+// fs.writeFile(path.join(__dirname, '/test', 'arquivo.txt'), 'Conteúdo do arquivo', (error) => {
+//     if (error) {
+//         return console.log(error);
+//     }
+//     console.log('Arquivo criado com sucesso!')
+
+// });
+
+fs.appendFile(path.join(__dirname, '/test', 'arquivo.txt'), '  adicionar texto', (error) => {
     if (error) {
         return console.log(error);
     }
-    console.log('Arquivo criado com sucesso!')
+    console.log('Arquivo atualizado com sucesso!')
 
 });
