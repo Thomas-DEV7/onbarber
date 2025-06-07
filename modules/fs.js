@@ -1,11 +1,19 @@
 const fs = require('fs');
 const path = require('path');
 
-fs.mkdir(path.join(__dirname, '/test'), (error) => {
+// fs.mkdir(path.join(__dirname, '/test'), (error) => {
+//     if (error) {
+//         return console.log(error);
+//     }
+
+//     console.log("Pasta criada com sucesso!")
+// });
+
+
+fs.writeFile(path.join(__dirname, '/test', 'arquivo.txt'), 'Conteúdo do arquivo', (error) => {
     if (error) {
         return console.log(error);
     }
+    console.log('Arquivo criado com sucesso!')
 
-    console.log("Pasta criada com sucesso!")
 });
-
