@@ -18,10 +18,17 @@ const path = require('path');
 
 // });
 
-fs.appendFile(path.join(__dirname, '/test', 'arquivo.txt'), '  adicionar texto', (error) => {
+// fs.appendFile(path.join(__dirname, '/test', 'arquivo.txt'), '  adicionar texto', (error) => {
+//     if (error) {
+//         return console.log(error);
+//     }
+//     console.log('Arquivo atualizado com sucesso!')
+
+// });
+
+fs.readFile(path.join(__dirname, '/test', 'arquivo.txt'), 'utf8', (error, data) => {
     if (error) {
         return console.log(error);
     }
-    console.log('Arquivo atualizado com sucesso!')
-
+    console.log(data);
 });
