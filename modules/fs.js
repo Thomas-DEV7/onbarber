@@ -26,9 +26,9 @@ const path = require('path');
 
 // });
 
-fs.readFile(path.join(__dirname, '/test', 'arquivo.txt'), 'utf8', (error, data) => {
-    if (error) {
-        return console.log(error);
-    }
-    console.log(data);
-});
+// fs.readFile(path.join(__dirname, '/test', 'arquivo.txt'), 'utf8', (error, data) => {
+//     if (error) {
+//         return console.log(error);
+//     }
+//     console.log(data);
+// });
