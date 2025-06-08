@@ -17,7 +17,15 @@ app.post('/users', async (req, res) => {
     }
 });
 
-
+//rota para buscar usuarios
+app.get('/users', async (req, res) => {
+    try {
+        const users = await UserModel.find();
+        res.status(200).send(users);
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+});
 
 
 // Inicialização do servidor
