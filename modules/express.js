@@ -70,6 +70,27 @@ app.put('/users/:id', async (req, res) => {
 
 });
 
+// Rota para enviar um email para o usuario de boa vindas
+app.post('/users/:id/send-welcome-email', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const user = await UserModel.findById(id);
+        if (!user) {
+            res.status(404).send({ message: 'User not found' });
+        } else {
+            const email = user.email;
+            const subject = 'Bem vindo ao sistema!';
+            const text = 'Olá, você foi cadastrado com sucesso!';
+            const html = `<h1> bem vindo ao sistema</h1>`;
+            await sendEmail(email, subject, text, html);
+            res.status(200).send({ message: 'Email sent' });
+        }
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+});
+
+
 // Inicialização do servidor
 app.listen(port, () => {
     console.log(`Servidor rodando: http://localhost:${port}`);
