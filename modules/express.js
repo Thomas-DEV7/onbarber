@@ -54,6 +54,21 @@ app.delete('/users/:id', async (req, res) => {
     }
 });
 
+// Atualizar usuario existente
+app.put('/users/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const user = await UserModel.findByIdAndUpdate(id, req.body, { new: true });
+        if (!user) {
+            res.status(404).send({ message: 'User not found' });
+        } else {
+            res.status(200).send(user);
+        }
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+
+});
 
 // Inicialização do servidor
 app.listen(port, () => {
