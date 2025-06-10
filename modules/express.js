@@ -43,6 +43,18 @@ app.get('/users/:id', async (req, res) => {
     }
 });
 
+// Deletar usuario
+app.delete('/users/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        await UserModel.findByIdAndDelete(id);
+        res.status(200).send({ message: 'User deleted' });
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+});
+
+
 // Inicialização do servidor
 app.listen(port, () => {
     console.log(`Servidor rodando: http://localhost:${port}`);
