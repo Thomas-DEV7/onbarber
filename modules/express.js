@@ -9,6 +9,13 @@ const port = 3000;
 // Middleware para habilitar JSON no body
 app.use(express.json());
 
+app.set('view engine', 'ejs')
+app.set('views', './src/views')
+
+app.get('/views/users', async (req, res)=>{
+    res.render('index', )
+})
+
 // Rota para criação de usuário
 app.post('/users', async (req, res) => {
     try {
@@ -28,6 +35,8 @@ app.get('/users', async (req, res) => {
         res.status(400).send(error.message);
     }
 });
+
+
 
 // buscar usuario por id
 app.get('/users/:id', async (req, res) => {
