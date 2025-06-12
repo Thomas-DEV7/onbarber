@@ -1,0 +1,9 @@
+<div class="container">
+    <div class="content">
+        <% if (users.length > 0) { %>
+            <% users.forEach(user => { %>
+                <h3 class="title"><%= user.firstName %> <%= user.lastName %> | <%= user.email %></h3>
+            <% }) %>
+        <% } %>
+    </div>
+</div>
