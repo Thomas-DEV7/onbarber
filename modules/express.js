@@ -89,20 +89,6 @@ app.patch('/users/:id', async (req, res) => {
     }
 });
 
-// gere um commentario explicando a diferença dos dois patch e put
-// o put é usado para atualizar todos os campos do usuario
-// o patch é usado para atualizar apenas os campos que foram passados no corpo da requisição
-// exemplo de requisição para o put
-// {
-//     "name": "nome",
-//     "email": "email"
-// }
-// exemplo de requisição para o patch
-// {
-//     "name": "nome"
-// }
-
-
 
 const sendEmail = async (email, subject, message) => {
     const transporter = nodemailer.createTransport({
