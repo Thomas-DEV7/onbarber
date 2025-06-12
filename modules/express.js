@@ -1,5 +1,7 @@
 const express = require('express');
 const UserModel = require('../src/models/user.model');
+const nodemailer = require('nodemailer');
+require('dotenv').config();
 
 const app = express();
 const port = 3000;
@@ -70,6 +72,59 @@ app.put('/users/:id', async (req, res) => {
 
 });
 
+// atualizar usuario com patch
+app.patch('/users/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const user = await UserModel.findByIdAndUpdate(id, req.body, { new: true });
+        if (!user) {
+            res.status(404).send({ message: 'User not found' });
+        } else {
+            res.status(200).send(user);
+        }
+
+    }
+    catch (error) {
+        res.status(400).send(error.message);
+    }
+});
+
+// gere um commentario explicando a diferença dos dois patch e put
+// o put é usado para atualizar todos os campos do usuario
+// o patch é usado para atualizar apenas os campos que foram passados no corpo da requisição
+// exemplo de requisição para o put
+// {
+//     "name": "nome",
+//     "email": "email"
+// }
+// exemplo de requisição para o patch
+// {
+//     "name": "nome"
+// }
+
+
+
+const sendEmail = async (email, subject, message) => {
+    const transporter = nodemailer.createTransport({
+        host: 'smtp.gmail.com',
+        port: 587,
+        secure: false,
+        auth: {
+            user: process.env.EMAIL_USER,
+            pass: process.env.EMAIL_PASS
+        }
+    });
+
+    const mailOptions = {
+        from: process.env.EMAIL_USER,
+        to: email,
+        subject: subject,
+        text: message
+    };
+
+    await transporter.sendMail(mailOptions);
+};
+
 // Rota para enviar um email para o usuario de boa vindas
 app.post('/users/:id/send-welcome-email', async (req, res) => {
     try {
@@ -82,7 +137,7 @@ app.post('/users/:id/send-welcome-email', async (req, res) => {
             const subject = 'Bem vindo ao sistema!';
             const text = 'Olá, você foi cadastrado com sucesso!';
             const html = `<h1> bem vindo ao sistema</h1>`;
-            await sendEmail(email, subject, text, html);
+            await sendEmail(email, subject, html);
             res.status(200).send({ message: 'Email sent' });
         }
     } catch (error) {
