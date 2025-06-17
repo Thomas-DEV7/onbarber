@@ -1,17 +1,28 @@
-<div class="container">
-    <div class="content">
-        <% if (users.length> 0) { %>
-            <% users.forEach(user=> { %>
-                <h3 class="title">
-                    <%= user.firstName %>
-                        <%= user.lastName %>
-                </h3>
-                <p>
-                    <%= user.email %>
-                </p>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Usuários</title>
+    <link rel="stylesheet" href="../public/styles.css">
+</head>
+<body>
+    <%- include('partials/navbar') %>
+
+    <div class="container">
+        <div class="content">
+            <% if (users.length > 0) { %>
+                <% users.forEach(user => { %>
+                    <h3 class="title">
+                        <%= user.firstName %> <%= user.lastName %>
+                    </h3>
+                    <p>
+                        <%= user.email %>
+                    </p>
                 <% }) %>
-                    <% } else { %>
-                        <p>Nenhum usuário</p>
-                        <% } %>
+            <% } else { %>
+                <p>Nenhum usuário</p>
+            <% } %>
+        </div>
     </div>
-</div>
+</body>
+</html>
